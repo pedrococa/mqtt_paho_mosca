@@ -1,0 +1,34 @@
+name: mqtt
+version: 0.1
+summary: paho mqtt subscriber and publisher
+description: MQTT example with a server, a publisher and a subscriber.
+confinement: strict 
+grade: stable
+
+apps:
+  mosca:
+    command: bin/mosca -v
+    daemon: simple
+    plugs: [network, network-bind]
+  subscribe:
+    command: subscribe.py
+    plugs: [network, network-bind]
+  publish:
+    command: publish.py
+    plugs: [network, network-bind]
+
+
+parts:
+  mosca:
+    plugin: nodejs
+    source: https://github.com/mcollina/mosca.git
+    source-type: git
+    build-packages: [libzmq-dev, libgssapi-krb5-2]
+  mqtt-client:
+    plugin: python
+    python-version: python3
+    source: https://github.com/eclipse/paho.mqtt.python.git 
+    source-type: git
+  scripts:
+    plugin: dump
+    source: .

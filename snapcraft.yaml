@@ -1,4 +1,4 @@
-name: mqtt
+name: mqtt-paho-mosca
 version: 0.1
 summary: paho mqtt subscriber and publisher
 description: MQTT example with a server, a publisher and a subscriber.
